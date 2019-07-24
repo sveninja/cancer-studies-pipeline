@@ -4,7 +4,7 @@
 ## Overview
 
 
-Goal of this project was to build a pipeline for retrival, processing, and analysis of a chosen data set to answer a specific research question.
+Goal of this project was to build a pipeline for retrieval, processing, and analysis of a chosen data set to answer a specific research question.
 
 
 ### Part 1: Data retrival, unpacking, and organization
@@ -34,18 +34,18 @@ Using this pipeline data from a variety of different cancer studies are retrieve
 #### get_cases function
 At the time of building the pipeline (June 20, 2019) the database held 33605 cases (reflected by the variable max_count).  The variable 'max_count' will need to be updated to retrieve all cases recorded if using the pipeline at a later point in time (current case numbers are listed on the GDC webpage).
 
-Variables such as 'gender' ('demographic.gender') are stored as key-value pairs within dictionaries in a single column under the main variable 'demographic' in the retrieved dataframes. Therefore, each dataframe holds nine columns/main variables (exceptions exist).
-Cases are retrieved in bundles of 1000 (max size per request) and stored in pandas dataframes. Dependent on the study the variable 'exposures' was recorded or not and the individual dataframes contain nine or eight (exception) columns, respectively. The 'get_cases()' function checks the presence of the eventually missing variable and if necessary inserts an additional row into the respective dataframe. Print statements can be used to monitor the dimensions of the individual dataframes before and after eventual insertion of the missing column.
+Variables such as 'gender' ('demographic.gender') are stored as key-value pairs within dictionaries in a single column under the main variable 'demographic' in the retrieved data frames. Therefore, each data frame holds nine columns/main variables (exceptions exist).
+Cases are retrieved in bundles of 1000 (max size per request) and stored in pandas data frames. Dependent on the study the variable 'exposures' was recorded or not and the individual data frames contain nine or eight (exception) columns, respectively. The 'get_cases()' function checks the presence of the eventually missing variable and if necessary inserts an additional row into the respective data frame. Print statements can be used to monitor the dimensions of the individual data frames before and after eventual insertion of the missing column.
 
 #### merge_dfs function
-This function merges individual dataframes into one main dataframe.
+This function merges individual data frames into one main data frame.
 
 #### unpack_dictionaries function
-This function unpacks variables in dictionaries and combines the resulting columns with the original dataframe
+This function unpacks variables in dictionaries and combines the resulting columns with the original data frame
 main variables: demographic, exposures, project
 
 #### drop_reorder_columns function
-This function drops columns that held the now unpacked dictionaries. Columns of the combined dataframe are reordered:
+This function drops columns that held the now unpacked dictionaries. Columns of the combined data frame are reordered:
 
 - case_id
 - disease_type
@@ -69,7 +69,7 @@ This function drops columns that held the now unpacked dictionaries. Columns of 
 - submitter_id
 
 #### save_csv function
-The combined, reordered dataframe is saved as a csv file ('cancer_ordered_raw'). At the time of building this pipeline the combined, reordered dataframe combines 47 studies/projects and consists of > 600K data points.
+The combined, reordered data frame is saved as a csv file ('cancer_ordered_raw'). At the time of building this pipeline the combined, reordered data frame combines 47 studies/projects and consists of > 600K data points.
 
 
 ### Part 2: Data cleaning/subsetting, analysis, and visualization
@@ -77,7 +77,7 @@ The combined, reordered dataframe is saved as a csv file ('cancer_ordered_raw').
 This part of the pipeline enables the user to analyze the data in respect to cancer type and alcohol history of the patient.
 
 #### read_data function
-This function reads the data (csv format) and converts it into a pandas dataframe.
+This function reads the data (csv format) and converts it into a pandas data frame.
 
 #### graph_cases_alc_history function
 This function outputs a bar graph showing the numbers of entries listing the alcohol history of a patient as 'yes' or 'no', respectively. 
@@ -86,7 +86,7 @@ This function outputs a bar graph showing the numbers of entries listing the alc
 This function outputs the numbers of entries listing the alcohol history of a patient as 'yes' or 'no', respectively (as previously displayed graphically), as well as the number of entries in which alcohol history was recorded.
 
 #### subset_df_alc_hist function
-This function subsets the dataset and returns a dataframe containing only cases in which the alcohol history of a patient was recorded, i.e. it is specifically denoted as 'yes' or 'no'.
+This function subsets the dataset and returns a data frame containing only cases in which the alcohol history of a patient was recorded, i.e. it is specifically denoted as 'yes' or 'no'.
 
 #### plot_top15_primary_sites function
 The top 15 primary cancer sites recorded in the main dataset are plotted as a pie chart.
@@ -98,7 +98,7 @@ The top 15 primary cancer sites recorded in the alcohol history data subset are 
 Case counts by primary site (not normalized to number of patients within each group) are returned as a bar graph.
 
 #### normalize_alc_hist function
-Returns a dataframe listing percentages of patients with alcohol history = 'yes' and alcohol history = 'no' normalized to number of patients within each group.
+Returns a data frame listing percentages of patients with alcohol history = 'yes' and alcohol history = 'no' normalized to number of patients within each group.
 
 #### plot_counts_prim_site_normalized function
-Percentages of case counts by primary site (normalized to number of patients within each group as dispalyed in the dataframe returned by the previous function) are returned as a bar graph.
+Percentages of case counts by primary site (normalized to number of patients within each group as displayed in the data frame returned by the previous function) are returned as a bar graph.
